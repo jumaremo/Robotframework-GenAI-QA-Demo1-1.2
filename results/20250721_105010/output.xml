@@ -1,0 +1,1231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.10.11 on win32)" generated="2025-07-21T10:51:15.743990" rpa="false" schemaversion="5">
+<suite id="s1" name="Login_Tests_20250721_105010" source="C:\Robotframework-GenAI-QA-Demo1-1.2\tests\login\siesa_login_tests.robot">
+<test id="s1-t1" name="Login With Valid Credentials" line="40">
+<kw name="Cargar Configuracion Central">
+<kw name="Obtener Estado Biblioteca" owner="GeminiLibrary">
+<msg time="2025-07-21T10:51:17.082613" level="INFO">${estado_biblioteca} = {'gemini_disponible': True, 'api_key_configurada': False, 'modelo_inicializado': False, 'modelo_nombre': 'gemini-1.5-flash', 'version': '4.0', 'modo': 'Fallback', 'tipo': 'Biblioteca Híbrida Gemini-Cl...</msg>
+<var>${estado_biblioteca}</var>
+<doc>Retorna información sobre el estado de la librería híbrida
+VERSIÓN v1.2: Incluye información de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:51:17.082613" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:17.082613" level="INFO">${config_info} = {'disponible': False, 'archivo_existe': False, 'total_credenciales': 0, 'entornos': [], 'errores': ['ConfigManager no inicializado']}</msg>
+<var>${config_info}</var>
+<arg>${estado_biblioteca}</arg>
+<arg>config_centralizada</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.082613" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:17.083614" level="INFO">${config_disponible} = False</msg>
+<var>${config_disponible}</var>
+<arg>${config_info}</arg>
+<arg>disponible</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.082613" elapsed="0.001001"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:51:17.083614" level="INFO">⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</msg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.083614" elapsed="0.000000"/>
+</kw>
+<arg>not ${config_disponible}</arg>
+<arg>Log</arg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>✅ Sistema de configuración centralizada v1.2 activo y funcionando</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.083614" elapsed="0.000000"/>
+</kw>
+<doc>Carga la configuración centralizada v1.2 y valida que esté disponible</doc>
+<status status="PASS" start="2025-07-21T10:51:17.081616" elapsed="0.001998"/>
+</kw>
+<kw name="Obtener Credencial Prioritaria Keyword">
+<kw name="Obtener Credencial Prioritaria" owner="GeminiLibrary">
+<msg time="2025-07-21T10:51:17.084613" level="INFO">⚠️ Usando credenciales válidas de fallback (no centralizadas)
+✅ Credencial prioritaria obtenida para entorno 'qa': juan.reina</msg>
+<msg time="2025-07-21T10:51:17.084613" level="INFO">${credencial} = {'usuario': 'juan.reina', 'clave': '1235', 'descripcion': 'Usuario de prueba funcional verificado (fallback)', 'tipo': 'funcional', 'estado': 'activo', 'prioridad': 1, 'entorno': 'qa'}</msg>
+<var>${credencial}</var>
+<arg>${entorno}</arg>
+<doc>Obtiene la credencial de mayor prioridad para un entorno</doc>
+<status status="PASS" start="2025-07-21T10:51:17.084613" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-07-21T10:51:17.084613" level="INFO">Length is 7.</msg>
+<arg>${credencial}</arg>
+<arg>No se pudo obtener credencial prioritaria para entorno: ${entorno}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.084613" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${credencial}</value>
+<status status="PASS" start="2025-07-21T10:51:17.084613" elapsed="0.000000"/>
+</return>
+<msg time="2025-07-21T10:51:17.084613" level="INFO">${credencial_prioritaria} = {'usuario': 'juan.reina', 'clave': '1235', 'descripcion': 'Usuario de prueba funcional verificado (fallback)', 'tipo': 'funcional', 'estado': 'activo', 'prioridad': 1, 'entorno': 'qa'}</msg>
+<var>${credencial_prioritaria}</var>
+<arg>qa</arg>
+<doc>Obtiene la credencial de mayor prioridad para un entorno específico</doc>
+<status status="PASS" start="2025-07-21T10:51:17.084613" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-07-21T10:51:17.085707" level="INFO">Length is 7.</msg>
+<arg>${credencial_prioritaria}</arg>
+<arg>No se pudo obtener credencial prioritaria desde configuración central</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.085707" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:17.085707" level="INFO">${usuario} = juan.reina</msg>
+<var>${usuario}</var>
+<arg>${credencial_prioritaria}</arg>
+<arg>usuario</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.085707" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:17.086708" level="INFO">${clave} = 1235</msg>
+<var>${clave}</var>
+<arg>${credencial_prioritaria}</arg>
+<arg>clave</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.086708" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:51:17.086708" level="INFO">Usando credencial desde configuración central: juan.reina</msg>
+<arg>Usando credencial desde configuración central: ${usuario}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.086708" elapsed="0.000000"/>
+</kw>
+<kw name="Abrir Navegador En Login">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:17.087703" level="INFO">Opening browser 'chrome' to base url 'https://erp-qa-beta.siesaerp.com/login?returnUrl=%2F'.</msg>
+<msg time="2025-07-21T10:51:17.228945" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-21T10:51:17.087703" elapsed="3.032683"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-21T10:51:20.121201" elapsed="0.032307"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2025-07-21T10:51:20.153508" elapsed="0.001752"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Iniciar</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-07-21T10:51:20.155761" elapsed="0.950571"/>
+</kw>
+<doc>Abre el navegador y navega a la página de login con configuración robusta</doc>
+<status status="PASS" start="2025-07-21T10:51:17.087703" elapsed="4.018629"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-21T10:51:23.113185" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-21T10:51:21.107331" elapsed="2.005854"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.114074" elapsed="0.039801"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:23.154876" level="INFO">Typing text 'juan.reina' into text field '//input[1]'.</msg>
+<arg>${CAMPO_USUARIO}</arg>
+<arg>${usuario}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.153875" elapsed="0.068889"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.223326" elapsed="0.012703"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:23.237050" level="INFO">Typing text '1235' into text field '//input[@type='password']'.</msg>
+<arg>${CAMPO_CLAVE}</arg>
+<arg>${clave}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.237050" elapsed="0.061666"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BOTON_LOGIN}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.299768" elapsed="0.014580"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:23.315347" level="INFO">Clicking element '//*[@data-automation-id="SDKButton_submit"]'.</msg>
+<arg>${BOTON_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.314348" elapsed="0.056152"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${ELEMENTO_CONFIRMACION_LOGIN}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:23.371584" elapsed="2.640919"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:51:26.013999" level="INFO">Login exitoso confirmado con credenciales desde configuración centralizada v1.2</msg>
+<arg>Login exitoso confirmado con credenciales desde configuración centralizada v1.2</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:51:26.013498" elapsed="0.000501"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:26.698856" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="login_exitoso_hibrido_v12.png"&gt;&lt;img src="login_exitoso_hibrido_v12.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>login_exitoso_hibrido_v12.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-07-21T10:51:26.014423" elapsed="0.685446"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-21T10:51:29.709523" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-21T10:51:26.699981" elapsed="3.009542"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:51:29.709523" elapsed="2.208558"/>
+</kw>
+<doc>Verifica login exitoso con credenciales garantizadas desde configuración centralizada v1.2</doc>
+<tag>login</tag>
+<tag>priority_high</tag>
+<tag>success</tag>
+<status status="PASS" start="2025-07-21T10:51:17.080615" elapsed="14.838429"/>
+</test>
+<test id="s1-t2" name="Login Interface Validation" line="79">
+<kw name="Abrir Navegador En Login">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:31.924810" level="INFO">Opening browser 'chrome' to base url 'https://erp-qa-beta.siesaerp.com/login?returnUrl=%2F'.</msg>
+<msg time="2025-07-21T10:51:32.072153" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-21T10:51:31.923811" elapsed="2.872272"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-21T10:51:34.796083" elapsed="0.032513"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2025-07-21T10:51:34.828596" elapsed="0.000991"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Iniciar</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-07-21T10:51:34.829587" elapsed="0.914579"/>
+</kw>
+<doc>Abre el navegador y navega a la página de login con configuración robusta</doc>
+<status status="PASS" start="2025-07-21T10:51:31.923811" elapsed="3.820355"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.745167" elapsed="0.039447"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.784614" elapsed="0.031830"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BOTON_LOGIN}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.816444" elapsed="0.015477"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Iniciar sesión</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.831921" elapsed="0.015912"/>
+</kw>
+<kw name="Element Should Be Enabled" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.848334" elapsed="0.019161"/>
+</kw>
+<kw name="Element Should Be Enabled" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.868494" elapsed="0.017709"/>
+</kw>
+<kw name="Element Should Be Enabled" owner="SeleniumLibrary">
+<arg>${BOTON_LOGIN}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.886203" elapsed="0.086627"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:51:35.972830" level="INFO">Interfaz de login validada correctamente</msg>
+<arg>Interfaz de login validada correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.972830" elapsed="0.000000"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:51:35.972830" elapsed="2.190650"/>
+</kw>
+<doc>Valida que todos los elementos de la interfaz de login estén presentes</doc>
+<tag>interface</tag>
+<tag>ui</tag>
+<tag>validation</tag>
+<status status="PASS" start="2025-07-21T10:51:31.921036" elapsed="6.243326"/>
+</test>
+<test id="s1-t3" name="Login With Empty Fields" line="102">
+<kw name="Abrir Navegador En Login">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:38.167453" level="INFO">Opening browser 'chrome' to base url 'https://erp-qa-beta.siesaerp.com/login?returnUrl=%2F'.</msg>
+<msg time="2025-07-21T10:51:38.302044" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-21T10:51:38.166436" elapsed="2.722988"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-21T10:51:40.889424" elapsed="0.028244"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2025-07-21T10:51:40.917668" elapsed="0.001515"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Iniciar</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-07-21T10:51:40.919183" elapsed="0.890792"/>
+</kw>
+<doc>Abre el navegador y navega a la página de login con configuración robusta</doc>
+<status status="PASS" start="2025-07-21T10:51:38.166436" elapsed="3.643539"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:41.811064" elapsed="0.040725"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:41.853494" elapsed="0.032367"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:41.886860" level="INFO">Typing text '' into text field '//input[1]'.</msg>
+<arg>${CAMPO_USUARIO}</arg>
+<arg>${EMPTY}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:41.885861" elapsed="0.122438"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:42.009377" level="INFO">Typing text '' into text field '//input[@type='password']'.</msg>
+<arg>${CAMPO_CLAVE}</arg>
+<arg>${EMPTY}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:42.008299" elapsed="0.142557"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:42.151958" level="INFO">Clicking element '//*[@data-automation-id="SDKButton_submit"]'.</msg>
+<arg>${BOTON_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:42.150856" elapsed="0.241244"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MENSAJE_CAMPOS_REQUERIDOS}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:42.393258" elapsed="0.238502"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:51:42.632762" level="INFO">Mensaje de campos requeridos mostrado correctamente</msg>
+<arg>Mensaje de campos requeridos mostrado correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:51:42.632762" elapsed="0.000000"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:42.814965" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="login_campos_vacios_v12.png"&gt;&lt;img src="login_campos_vacios_v12.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>login_campos_vacios_v12.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-07-21T10:51:42.633762" elapsed="0.181701"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:51:42.815463" elapsed="2.183184"/>
+</kw>
+<doc>Valida comportamiento del sistema con campos vacíos</doc>
+<tag>empty_fields</tag>
+<tag>error</tag>
+<tag>validation</tag>
+<status status="PASS" start="2025-07-21T10:51:38.165355" elapsed="6.833292"/>
+</test>
+<test id="s1-t4" name="Login With Invalid Username" line="125">
+<kw name="Cargar Configuracion Central">
+<kw name="Obtener Estado Biblioteca" owner="GeminiLibrary">
+<msg time="2025-07-21T10:51:45.002753" level="INFO">${estado_biblioteca} = {'gemini_disponible': True, 'api_key_configurada': False, 'modelo_inicializado': False, 'modelo_nombre': 'gemini-1.5-flash', 'version': '4.0', 'modo': 'Fallback', 'tipo': 'Biblioteca Híbrida Gemini-Cl...</msg>
+<var>${estado_biblioteca}</var>
+<doc>Retorna información sobre el estado de la librería híbrida
+VERSIÓN v1.2: Incluye información de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:51:45.002753" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:45.002753" level="INFO">${config_info} = {'disponible': False, 'archivo_existe': False, 'total_credenciales': 0, 'entornos': [], 'errores': ['ConfigManager no inicializado']}</msg>
+<var>${config_info}</var>
+<arg>${estado_biblioteca}</arg>
+<arg>config_centralizada</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.002753" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:45.003675" level="INFO">${config_disponible} = False</msg>
+<var>${config_disponible}</var>
+<arg>${config_info}</arg>
+<arg>disponible</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.003675" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:51:45.004753" level="INFO">⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</msg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.003675" elapsed="0.001078"/>
+</kw>
+<arg>not ${config_disponible}</arg>
+<arg>Log</arg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>✅ Sistema de configuración centralizada v1.2 activo y funcionando</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.003675" elapsed="0.001078"/>
+</kw>
+<doc>Carga la configuración centralizada v1.2 y valida que esté disponible</doc>
+<status status="PASS" start="2025-07-21T10:51:45.001750" elapsed="0.003003"/>
+</kw>
+<kw name="Generar Credenciales Siesa" owner="GeminiLibrary">
+<msg time="2025-07-21T10:51:45.005745" level="INFO">⚠️ Usando credenciales válidas de fallback (no centralizadas)</msg>
+<msg time="2025-07-21T10:51:45.005745" level="INFO">${credenciales} = {'metadata': {'generado_en': '2025-07-21T10:51:45.005745', 'cantidad_solicitada': 1, 'proveedor_ia': 'fallback', 'version': '4.0', 'biblioteca': 'GeminiLibrary', 'config_centralizada': False}, 'creden...</msg>
+<var>${credenciales}</var>
+<arg>cantidad=1</arg>
+<doc>Genera credenciales específicamente para SIESA ERP (método único de Gemini)
+VERSIÓN v1.2: Integrado con sistema de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:51:45.004753" elapsed="0.000992"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:45.006705" level="INFO">${invalidas} = [{'usuario': '', 'clave': '', 'descripcion': 'Campos completamente vacíos', 'error_esperado': 'required_fields', 'categoria': 'campos_vacios'}]</msg>
+<var>${invalidas}</var>
+<arg>${credenciales}</arg>
+<arg>credenciales_invalidas</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.005745" elapsed="0.000960"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-07-21T10:51:45.007664" level="INFO">${cred_test} = {'usuario': '', 'clave': '', 'descripcion': 'Campos completamente vacíos', 'error_esperado': 'required_fields', 'categoria': 'campos_vacios'}</msg>
+<var>${cred_test}</var>
+<arg>${invalidas[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.006705" elapsed="0.000959"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:51:45.008668" level="INFO">${usuario_invalido} = </msg>
+<var>${usuario_invalido}</var>
+<arg>${cred_test}</arg>
+<arg>usuario</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.008668" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable If" owner="BuiltIn">
+<msg time="2025-07-21T10:51:45.008668" level="INFO">${usuario_final} = usuario_inexistente_hibrido_v12</msg>
+<var>${usuario_final}</var>
+<arg>'${usuario_invalido}' == ''</arg>
+<arg>usuario_inexistente_hibrido_v12</arg>
+<arg>${usuario_invalido}</arg>
+<doc>Sets variable based on the given condition.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.008668" elapsed="0.000000"/>
+</kw>
+<kw name="Abrir Navegador En Login">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:45.009814" level="INFO">Opening browser 'chrome' to base url 'https://erp-qa-beta.siesaerp.com/login?returnUrl=%2F'.</msg>
+<msg time="2025-07-21T10:51:45.144905" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-21T10:51:45.009814" elapsed="2.848954"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-21T10:51:47.859943" elapsed="0.026966"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2025-07-21T10:51:47.887910" elapsed="0.002290"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Iniciar</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-07-21T10:51:47.891194" elapsed="0.911846"/>
+</kw>
+<doc>Abre el navegador y navega a la página de login con configuración robusta</doc>
+<status status="PASS" start="2025-07-21T10:51:45.009814" elapsed="3.793730"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:48.803544" elapsed="0.031124"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:48.835465" elapsed="0.058813"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:48.895380" level="INFO">Typing text 'usuario_inexistente_hibrido_v12' into text field '//input[1]'.</msg>
+<arg>${CAMPO_USUARIO}</arg>
+<arg>${usuario_final}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:48.895380" elapsed="0.090072"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:48.986692" level="INFO">Typing text 'password123' into text field '//input[@type='password']'.</msg>
+<arg>${CAMPO_CLAVE}</arg>
+<arg>password123</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:48.985951" elapsed="0.195968"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:51:49.183179" level="INFO">Clicking element '//*[@data-automation-id="SDKButton_submit"]'.</msg>
+<arg>${BOTON_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:51:49.182476" elapsed="0.175008"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MENSAJE_CAMPOS_REQUERIDOS}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:51:49.359057" elapsed="0.314126"/>
+</kw>
+<msg time="2025-07-21T10:51:49.673683" level="INFO">${error_campos} = True</msg>
+<var>${error_campos}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${MENSAJE_CAMPOS_REQUERIDOS}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-07-21T10:51:49.358555" elapsed="0.315128"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:00.022352" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-07-21T10:52:00.022352" level="FAIL">Element '//div[contains(@class, 'rz-notification-content') and contains(text(), 'Credenciales invalidas')]' not visible after 10 seconds.</msg>
+<arg>${MENSAJE_CREDENCIALES_INVALIDAS}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-07-21T10:51:49.676944" elapsed="10.351317">Element '//div[contains(@class, 'rz-notification-content') and contains(text(), 'Credenciales invalidas')]' not visible after 10 seconds.</status>
+</kw>
+<msg time="2025-07-21T10:52:00.028261" level="INFO">${error_credenciales} = False</msg>
+<var>${error_credenciales}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${MENSAJE_CREDENCIALES_INVALIDAS}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-07-21T10:51:49.676443" elapsed="10.351818"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-07-21T10:52:00.029263" level="INFO">${hay_error} = True</msg>
+<var>${hay_error}</var>
+<arg>${error_campos} or ${error_credenciales}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-07-21T10:52:00.028261" elapsed="0.001002"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${hay_error}</arg>
+<arg>Se esperaba algún mensaje de error</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-07-21T10:52:00.030264" elapsed="0.000000"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:00.224771" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="login_password_invalido_v12.png"&gt;&lt;img src="login_password_invalido_v12.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>login_password_invalido_v12.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-07-21T10:52:00.030264" elapsed="0.194507"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:52:00.225705" elapsed="2.180653"/>
+</kw>
+<doc>Prueba login con usuario inexistente usando configuración centralizada v1.2</doc>
+<tag>error</tag>
+<tag>invalid_credentials</tag>
+<status status="PASS" start="2025-07-21T10:51:45.000670" elapsed="17.405688"/>
+</test>
+<test id="s1-t5" name="Login With Generated Invalid Credentials" line="164">
+<kw name="Cargar Configuracion Central">
+<kw name="Obtener Estado Biblioteca" owner="GeminiLibrary">
+<msg time="2025-07-21T10:52:02.408614" level="INFO">${estado_biblioteca} = {'gemini_disponible': True, 'api_key_configurada': False, 'modelo_inicializado': False, 'modelo_nombre': 'gemini-1.5-flash', 'version': '4.0', 'modo': 'Fallback', 'tipo': 'Biblioteca Híbrida Gemini-Cl...</msg>
+<var>${estado_biblioteca}</var>
+<doc>Retorna información sobre el estado de la librería híbrida
+VERSIÓN v1.2: Incluye información de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:52:02.408614" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:02.408614" level="INFO">${config_info} = {'disponible': False, 'archivo_existe': False, 'total_credenciales': 0, 'entornos': [], 'errores': ['ConfigManager no inicializado']}</msg>
+<var>${config_info}</var>
+<arg>${estado_biblioteca}</arg>
+<arg>config_centralizada</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:02.408614" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:02.409718" level="INFO">${config_disponible} = False</msg>
+<var>${config_disponible}</var>
+<arg>${config_info}</arg>
+<arg>disponible</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:02.409718" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:52:02.409718" level="INFO">⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</msg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:52:02.409718" elapsed="0.000000"/>
+</kw>
+<arg>not ${config_disponible}</arg>
+<arg>Log</arg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>✅ Sistema de configuración centralizada v1.2 activo y funcionando</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-07-21T10:52:02.409718" elapsed="0.000000"/>
+</kw>
+<doc>Carga la configuración centralizada v1.2 y valida que esté disponible</doc>
+<status status="PASS" start="2025-07-21T10:52:02.408614" elapsed="0.001104"/>
+</kw>
+<kw name="Generar Credenciales Siesa" owner="GeminiLibrary">
+<msg time="2025-07-21T10:52:02.410615" level="INFO">⚠️ Usando credenciales válidas de fallback (no centralizadas)</msg>
+<msg time="2025-07-21T10:52:02.410615" level="INFO">${credenciales} = {'metadata': {'generado_en': '2025-07-21T10:52:02.410615', 'cantidad_solicitada': 3, 'proveedor_ia': 'fallback', 'version': '4.0', 'biblioteca': 'GeminiLibrary', 'config_centralizada': False}, 'creden...</msg>
+<var>${credenciales}</var>
+<arg>cantidad=3</arg>
+<doc>Genera credenciales específicamente para SIESA ERP (método único de Gemini)
+VERSIÓN v1.2: Integrado con sistema de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:52:02.410615" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:02.410615" level="INFO">${invalidas} = [{'usuario': '', 'clave': '', 'descripcion': 'Campos completamente vacíos', 'error_esperado': 'required_fields', 'categoria': 'campos_vacios'}, {'usuario': 'usuario_inexistente_2025', 'clave': 'passwo...</msg>
+<var>${invalidas}</var>
+<arg>${credenciales}</arg>
+<arg>credenciales_invalidas</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:02.410615" elapsed="0.000000"/>
+</kw>
+<kw name="Abrir Navegador En Login">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:02.411704" level="INFO">Opening browser 'chrome' to base url 'https://erp-qa-beta.siesaerp.com/login?returnUrl=%2F'.</msg>
+<msg time="2025-07-21T10:52:02.549488" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-21T10:52:02.411704" elapsed="2.837245"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-21T10:52:05.248949" elapsed="0.024564"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2025-07-21T10:52:05.273513" elapsed="0.000996"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Iniciar</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-07-21T10:52:05.275510" elapsed="1.158440"/>
+</kw>
+<doc>Abre el navegador y navega a la página de login con configuración robusta</doc>
+<status status="PASS" start="2025-07-21T10:52:02.411704" elapsed="4.022246"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-07-21T10:52:06.435058" level="INFO">${cred_test} = {'usuario': '', 'clave': '', 'descripcion': 'Campos completamente vacíos', 'error_esperado': 'required_fields', 'categoria': 'campos_vacios'}</msg>
+<var>${cred_test}</var>
+<arg>${invalidas[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.433950" elapsed="0.001108"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:06.436095" level="INFO">${usuario_test} = </msg>
+<var>${usuario_test}</var>
+<arg>${cred_test}</arg>
+<arg>usuario</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.436095" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:06.437054" level="INFO">${clave_test} = </msg>
+<var>${clave_test}</var>
+<arg>${cred_test}</arg>
+<arg>clave</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.436095" elapsed="0.000959"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:06.437054" level="INFO">${categoria} = campos_vacios</msg>
+<var>${categoria}</var>
+<arg>${cred_test}</arg>
+<arg>categoria</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.437054" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:52:06.438056" level="INFO">Probando credencial generada por Gemini - Categoría: campos_vacios</msg>
+<arg>Probando credencial generada por Gemini - Categoría: ${categoria}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.438056" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable If" owner="BuiltIn">
+<msg time="2025-07-21T10:52:06.438056" level="INFO">${usuario_final} = usuario_vacio_v12</msg>
+<var>${usuario_final}</var>
+<arg>'${usuario_test}' == ''</arg>
+<arg>usuario_vacio_v12</arg>
+<arg>${usuario_test}</arg>
+<doc>Sets variable based on the given condition.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.438056" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable If" owner="BuiltIn">
+<msg time="2025-07-21T10:52:06.439066" level="INFO">${clave_final} = clave_vacia_v12</msg>
+<var>${clave_final}</var>
+<arg>'${clave_test}' == ''</arg>
+<arg>clave_vacia_v12</arg>
+<arg>${clave_test}</arg>
+<doc>Sets variable based on the given condition.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.439066" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.439066" elapsed="0.025936"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.465002" elapsed="0.019026"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:06.485082" level="INFO">Typing text 'usuario_vacio_v12' into text field '//input[1]'.</msg>
+<arg>${CAMPO_USUARIO}</arg>
+<arg>${usuario_final}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.484750" elapsed="0.216022"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:06.701780" level="INFO">Typing text 'clave_vacia_v12' into text field '//input[@type='password']'.</msg>
+<arg>${CAMPO_CLAVE}</arg>
+<arg>${clave_final}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.700772" elapsed="0.204413"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:06.906676" level="INFO">Clicking element '//*[@data-automation-id="SDKButton_submit"]'.</msg>
+<arg>${BOTON_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-21T10:52:06.905675" elapsed="0.119406"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MENSAJE_CAMPOS_REQUERIDOS}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-21T10:52:07.026082" elapsed="0.254583"/>
+</kw>
+<msg time="2025-07-21T10:52:07.280665" level="INFO">${error_campos} = True</msg>
+<var>${error_campos}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${MENSAJE_CAMPOS_REQUERIDOS}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-07-21T10:52:07.025582" elapsed="0.255083"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:17.562749" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-07-21T10:52:17.562749" level="FAIL">Element '//div[contains(@class, 'rz-notification-content') and contains(text(), 'Credenciales invalidas')]' not visible after 10 seconds.</msg>
+<arg>${MENSAJE_CREDENCIALES_INVALIDAS}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2025-07-21T10:52:07.281737" elapsed="10.281012">Element '//div[contains(@class, 'rz-notification-content') and contains(text(), 'Credenciales invalidas')]' not visible after 10 seconds.</status>
+</kw>
+<msg time="2025-07-21T10:52:17.562749" level="INFO">${error_credenciales} = False</msg>
+<var>${error_credenciales}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${MENSAJE_CREDENCIALES_INVALIDAS}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-07-21T10:52:07.281737" elapsed="10.281012"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-07-21T10:52:17.563857" level="INFO">${hay_error} = True</msg>
+<var>${hay_error}</var>
+<arg>${error_campos} or ${error_credenciales}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-07-21T10:52:17.563857" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${hay_error}</arg>
+<arg>Se esperaba algún mensaje de error para credencial inválida</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-07-21T10:52:17.563857" elapsed="0.001006"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:52:17.564863" level="INFO">Credencial inválida generada por Gemini funcionó como se esperaba (configuración centralizada v1.2)</msg>
+<arg>Credencial inválida generada por Gemini funcionó como se esperaba (configuración centralizada v1.2)</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:52:17.564863" elapsed="0.000000"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-07-21T10:52:17.725331" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="login_gemini_invalido_v12.png"&gt;&lt;img src="login_gemini_invalido_v12.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>login_gemini_invalido_v12.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-07-21T10:52:17.565874" elapsed="0.159457"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:52:17.726332" elapsed="2.191853"/>
+</kw>
+<doc>Prueba login con credenciales inválidas generadas por Gemini IA usando configuración centralizada v1.2</doc>
+<tag>ai_generated</tag>
+<tag>error</tag>
+<tag>gemini</tag>
+<status status="PASS" start="2025-07-21T10:52:02.407618" elapsed="17.510567"/>
+</test>
+<test id="s1-t6" name="Login With Multiple Environment Credentials" line="211">
+<kw name="Cargar Configuracion Central">
+<kw name="Obtener Estado Biblioteca" owner="GeminiLibrary">
+<msg time="2025-07-21T10:52:19.923262" level="INFO">${estado_biblioteca} = {'gemini_disponible': True, 'api_key_configurada': False, 'modelo_inicializado': False, 'modelo_nombre': 'gemini-1.5-flash', 'version': '4.0', 'modo': 'Fallback', 'tipo': 'Biblioteca Híbrida Gemini-Cl...</msg>
+<var>${estado_biblioteca}</var>
+<doc>Retorna información sobre el estado de la librería híbrida
+VERSIÓN v1.2: Incluye información de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:52:19.923262" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:19.924261" level="INFO">${config_info} = {'disponible': False, 'archivo_existe': False, 'total_credenciales': 0, 'entornos': [], 'errores': ['ConfigManager no inicializado']}</msg>
+<var>${config_info}</var>
+<arg>${estado_biblioteca}</arg>
+<arg>config_centralizada</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.924261" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:19.925259" level="INFO">${config_disponible} = False</msg>
+<var>${config_disponible}</var>
+<arg>${config_info}</arg>
+<arg>disponible</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.924261" elapsed="0.000998"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:52:19.926258" level="INFO">⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</msg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.925259" elapsed="0.000999"/>
+</kw>
+<arg>not ${config_disponible}</arg>
+<arg>Log</arg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>✅ Sistema de configuración centralizada v1.2 activo y funcionando</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.925259" elapsed="0.000999"/>
+</kw>
+<doc>Carga la configuración centralizada v1.2 y valida que esté disponible</doc>
+<status status="PASS" start="2025-07-21T10:52:19.922241" elapsed="0.004017"/>
+</kw>
+<kw name="Obtener Credenciales Centralizadas Keyword">
+<kw name="Obtener Credenciales Centralizadas" owner="GeminiLibrary">
+<msg time="2025-07-21T10:52:19.927259" level="INFO">⚠️ ConfigManager no disponible. Usando credenciales de fallback.
+⚠️ Usando credenciales válidas de fallback (no centralizadas)</msg>
+<msg time="2025-07-21T10:52:19.927259" level="INFO">${credenciales} = [{'usuario': 'juan.reina', 'clave': '1235', 'descripcion': 'Usuario de prueba funcional verificado (fallback)', 'tipo': 'funcional', 'estado': 'activo', 'prioridad': 1, 'entorno': 'qa'}]</msg>
+<var>${credenciales}</var>
+<arg>${entorno}</arg>
+<doc>Obtiene credenciales desde el sistema centralizado</doc>
+<status status="PASS" start="2025-07-21T10:52:19.927259" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-07-21T10:52:19.928259" level="INFO">Length is 1.</msg>
+<arg>${credenciales}</arg>
+<arg>No se encontraron credenciales para entorno: ${entorno}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.928259" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${credenciales} (más flexible)</value>
+<status status="PASS" start="2025-07-21T10:52:19.928259" elapsed="0.000000"/>
+</return>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<var>${error_campos}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${MENSAJE_CAMPOS_REQUERIDOS}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.928259" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<var>${error_credenciales}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${MENSAJE_CREDENCIALES_INVALIDAS}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.929257" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${hay_error}</var>
+<arg>${error_campos} or ${error_credenciales}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.929257" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${hay_error}</arg>
+<arg>Se esperaba algún mensaje de error</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.929257" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${error_campos}</arg>
+<arg>Log</arg>
+<arg>Error de campos detectado</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.929257" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${error_credenciales}</arg>
+<arg>Log</arg>
+<arg>Error de credenciales detectado</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.929257" elapsed="0.000000"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<arg>login_usuario_invalido_v12.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.929257" elapsed="0.000000"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.929257" elapsed="0.001000"/>
+</kw>
+<msg time="2025-07-21T10:52:19.930257" level="INFO">${credenciales_qa} = [{'usuario': 'juan.reina', 'clave': '1235', 'descripcion': 'Usuario de prueba funcional verificado (fallback)', 'tipo': 'funcional', 'estado': 'activo', 'prioridad': 1, 'entorno': 'qa'}] (más flexible...</msg>
+<var>${credenciales_qa}</var>
+<arg>qa</arg>
+<doc>Obtiene todas las credenciales para un entorno específico</doc>
+<status status="PASS" start="2025-07-21T10:52:19.927259" elapsed="0.002998"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-07-21T10:52:19.930257" level="INFO">Length is 201.</msg>
+<arg>${credenciales_qa}</arg>
+<arg>No se encontraron credenciales para entorno QA</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.930257" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-07-21T10:52:19.931316" level="INFO">${credencial_qa} = [</msg>
+<var>${credencial_qa}</var>
+<arg>${credenciales_qa[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.931316" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:19.932255" level="FAIL">TypeError: Expected argument 1 to be a dictionary, got string instead.</msg>
+<var>${usuario_qa}</var>
+<arg>${credencial_qa}</arg>
+<arg>usuario</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="FAIL" start="2025-07-21T10:52:19.931316" elapsed="0.000939">TypeError: Expected argument 1 to be a dictionary, got string instead.</status>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${clave_qa}</var>
+<arg>${credencial_qa}</arg>
+<arg>clave</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.932255" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Probando credencial de entorno QA desde configuración central: ${usuario_qa}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.932255" elapsed="0.000000"/>
+</kw>
+<kw name="Abrir Navegador En Login">
+<doc>Abre el navegador y navega a la página de login con configuración robusta</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.933256" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.933256" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.934272" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>${CAMPO_USUARIO}</arg>
+<arg>${usuario_qa}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.934272" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.934272" elapsed="0.000984"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>${CAMPO_CLAVE}</arg>
+<arg>${clave_qa}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.935256" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BOTON_LOGIN}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.936340" elapsed="0.000000"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>${BOTON_LOGIN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.937254" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${ELEMENTO_CONFIRMACION_LOGIN}</arg>
+<arg>timeout=${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.937254" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Login exitoso con credencial de entorno QA desde configuración centralizada v1.2</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.937254" elapsed="0.000000"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<arg>login_qa_centralizado_v12.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.938255" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.938255" elapsed="0.000000"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.939394" elapsed="0.000000"/>
+</kw>
+<doc>Prueba login con credenciales de diferentes entornos usando configuración centralizada v1.2</doc>
+<tag>config_centralizada</tag>
+<tag>multiambiente</tag>
+<tag>v12</tag>
+<status status="FAIL" start="2025-07-21T10:52:19.920160" elapsed="0.019786">TypeError: Expected argument 1 to be a dictionary, got string instead.</status>
+</test>
+<test id="s1-t7" name="Validar Sistema Configuracion Centralizada" line="250">
+<kw name="Cargar Configuracion Central">
+<kw name="Obtener Estado Biblioteca" owner="GeminiLibrary">
+<msg time="2025-07-21T10:52:19.940952" level="INFO">${estado_biblioteca} = {'gemini_disponible': True, 'api_key_configurada': False, 'modelo_inicializado': False, 'modelo_nombre': 'gemini-1.5-flash', 'version': '4.0', 'modo': 'Fallback', 'tipo': 'Biblioteca Híbrida Gemini-Cl...</msg>
+<var>${estado_biblioteca}</var>
+<doc>Retorna información sobre el estado de la librería híbrida
+VERSIÓN v1.2: Incluye información de configuración centralizada</doc>
+<status status="PASS" start="2025-07-21T10:52:19.940952" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:19.941953" level="INFO">${config_info} = {'disponible': False, 'archivo_existe': False, 'total_credenciales': 0, 'entornos': [], 'errores': ['ConfigManager no inicializado']}</msg>
+<var>${config_info}</var>
+<arg>${estado_biblioteca}</arg>
+<arg>config_centralizada</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.941953" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:19.941953" level="INFO">${config_disponible} = False</msg>
+<var>${config_disponible}</var>
+<arg>${config_info}</arg>
+<arg>disponible</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.941953" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-21T10:52:19.941953" level="INFO">⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</msg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.941953" elapsed="0.000000"/>
+</kw>
+<arg>not ${config_disponible}</arg>
+<arg>Log</arg>
+<arg>⚠️ ADVERTENCIA: Sistema de configuración centralizada no disponible, usando fallback</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>✅ Sistema de configuración centralizada v1.2 activo y funcionando</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.941953" elapsed="0.000000"/>
+</kw>
+<doc>Carga la configuración centralizada v1.2 y valida que esté disponible</doc>
+<status status="PASS" start="2025-07-21T10:52:19.940952" elapsed="0.001001"/>
+</kw>
+<kw name="Validar Configuracion Centralizada" owner="GeminiLibrary">
+<msg time="2025-07-21T10:52:19.942952" level="INFO">${estado_config} = {'config_manager_disponible': False, 'archivo_credenciales_existe': False, 'total_credenciales': 0, 'entornos_configurados': [], 'errores': ['ConfigManager no inicializado']}</msg>
+<var>${estado_config}</var>
+<doc>Valida que el sistema de configuración centralizada esté funcionando</doc>
+<status status="PASS" start="2025-07-21T10:52:19.942952" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-07-21T10:52:19.942952" level="INFO">${config_disponible} = False</msg>
+<var>${config_disponible}</var>
+<arg>${estado_config}</arg>
+<arg>config_manager_disponible</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-07-21T10:52:19.942952" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2025-07-21T10:52:19.943953" level="FAIL">ConfigManager no está disponible</msg>
+<arg>${config_disponible}</arg>
+<arg>ConfigManager no está disponible</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2025-07-21T10:52:19.943953" elapsed="0.000000">ConfigManager no está disponible</status>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${archivo_existe}</var>
+<arg>${estado_config}</arg>
+<arg>archivo_credenciales_existe</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.943953" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${archivo_existe}</arg>
+<arg>Archivo de credenciales centrales no existe</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.943953" elapsed="0.000999"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${total_credenciales}</var>
+<arg>${estado_config}</arg>
+<arg>total_credenciales</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.944952" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${total_credenciales} &gt; 0</arg>
+<arg>No hay credenciales configuradas en el sistema central</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.944952" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${entornos}</var>
+<arg>${estado_config}</arg>
+<arg>entornos_configurados</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.944952" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${entornos}</arg>
+<arg>No hay entornos configurados</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.945952" elapsed="0.000000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${errores}</var>
+<arg>${estado_config}</arg>
+<arg>errores</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.945952" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Empty" owner="BuiltIn">
+<arg>${errores}</arg>
+<arg>Errores encontrados en configuración centralizada: ${errores}</arg>
+<doc>Verifies that the given item is empty.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.945952" elapsed="0.001000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>✅ Sistema de configuración centralizada v1.2 validado correctamente</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.946952" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>📊 Total credenciales: ${total_credenciales}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.946952" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>🌍 Entornos configurados: ${entornos}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-07-21T10:52:19.946952" elapsed="0.000000"/>
+</kw>
+<doc>Valida que el sistema de configuración centralizada v1.2 esté funcionando correctamente</doc>
+<tag>config_centralizada</tag>
+<tag>sistema_v12</tag>
+<tag>validacion</tag>
+<status status="FAIL" start="2025-07-21T10:52:19.940952" elapsed="0.007001">ConfigManager no está disponible</status>
+</test>
+<doc>Demo de pruebas de login en SIESA ERP con datos generados por IA</doc>
+<status status="FAIL" start="2025-07-21T10:51:15.745938" elapsed="64.203015"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">ai_generated</stat>
+<stat pass="0" fail="2" skip="0">config_centralizada</stat>
+<stat pass="1" fail="0" skip="0">empty_fields</stat>
+<stat pass="3" fail="0" skip="0">error</stat>
+<stat pass="1" fail="0" skip="0">gemini</stat>
+<stat pass="1" fail="0" skip="0">interface</stat>
+<stat pass="1" fail="0" skip="0">invalid_credentials</stat>
+<stat pass="1" fail="0" skip="0">login</stat>
+<stat pass="0" fail="1" skip="0">multiambiente</stat>
+<stat pass="1" fail="0" skip="0">priority_high</stat>
+<stat pass="0" fail="1" skip="0">sistema_v12</stat>
+<stat pass="1" fail="0" skip="0">success</stat>
+<stat pass="1" fail="0" skip="0">ui</stat>
+<stat pass="0" fail="1" skip="0">v12</stat>
+<stat pass="0" fail="1" skip="0">validacion</stat>
+<stat pass="2" fail="0" skip="0">validation</stat>
+</tag>
+<suite>
+<stat name="Login_Tests_20250721_105010" id="s1" pass="5" fail="2" skip="0">Login_Tests_20250721_105010</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-07-21T10:51:17.228945" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2025-07-21T10:51:32.072153" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2025-07-21T10:51:38.302044" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2025-07-21T10:51:45.144905" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2025-07-21T10:52:02.549488" level="WARN">The chromedriver version (137.0.7151.68) detected in PATH at C:\Users\jmreinam\AppData\Local\Programs\Python\Python39\Scripts\chromedriver.exe might not be compatible with the detected chrome version (138.0.7204.158); currently, chromedriver 138.0.7204.157 is recommended for chrome 138.*, so it is advised to delete the driver in PATH and retry</msg>
+</errors>
+</robot>
